@@ -127,7 +127,7 @@ def router_agent(state: LogisticsState) -> LogisticsState:
     response = llm.invoke([
         SystemMessage(content=system_prompt),
         HumanMessage(content=f"""
-        Payload to evaluate:
+        Payload too evaluate:
         {state['raw_payload']}
         
         Current loop count: {state.get('loop_count', 0)}
@@ -149,7 +149,7 @@ def router_agent(state: LogisticsState) -> LogisticsState:
     # unless the error specifically requires re-extraction
     if state.get('loop_count', 0) > 0 and state.get('extracted_data'):
         result["decision"] = "extraction"  # Re-extract with error context
-        result["reasoning"] = f"Re-extraction needed (attempt {state.get('loop_count', 0) + 1}/3)"
+        result["reasoning"] = f"now Re-extraction needed (attempt {state.get('loop_count', 0) + 1}/3)"
     
     return {
         **state,
